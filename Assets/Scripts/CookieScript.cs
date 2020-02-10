@@ -10,7 +10,7 @@ public class CookieScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.velocity
+        //this.velocity;
     }
 
     // Update is called once per frame
