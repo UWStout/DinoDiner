@@ -26,7 +26,7 @@ public class CustomerSpawnerScript : MonoBehaviour
         int wait_time;
         while (true)
         {
-            wait_time = Random.Range(0, 5);
+            wait_time = Random.Range(0, 20);
             yield return new WaitForSeconds(wait_time);
             Instantiate(pool[Random.Range(0, 3)], this.transform.position, this.transform.rotation);
         }
