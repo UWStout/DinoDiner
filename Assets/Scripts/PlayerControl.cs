@@ -117,7 +117,7 @@ public class PlayerControl : MonoBehaviour
         }
         else if (collision.gameObject.tag == "SmallPellet")
         {
-
+        }
         else if (collision.gameObject.tag == "BigPellet")
         {
             collision.gameObject.SetActive(false);

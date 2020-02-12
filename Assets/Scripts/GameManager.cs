@@ -1,16 +1,4 @@
-<<<<<<< HEAD
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class GameManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-=======
-﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -46,22 +34,16 @@ public class GameManager : MonoBehaviour
     {
         scorecountText = GameObject.Find("ScoreCountText").GetComponent<Text>();
         setScoreCountText();
->>>>>>> 7acb2746e2bc44ee28800ac67090ef9055389569
     }
 
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
         
-    }
-=======
     }
 
     public void setScoreCountText()
     {
         scorecountText.text = "Score: " + score.ToString();
     }
-
->>>>>>> 7acb2746e2bc44ee28800ac67090ef9055389569
 }
