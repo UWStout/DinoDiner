@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class CustomerMovementScript: MonoBehaviour
 {
-    private Vector3 origin;
-    private Vector3 destination;
-    public int timetoendsec = 5;
-
+    public float speed = 5;
 
     // Start is called before the first frame update
     void Start()
     {
         //origin = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
-        InvokeRepeating("moveForward", 1f, 1f);
+        InvokeRepeating("moveForward", 1f, speed/5);
     }
 
     // Update is called once per frame
@@ -23,7 +20,7 @@ public class CustomerMovementScript: MonoBehaviour
 
     private void moveForward()
     {
-        this.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y, this.transform.position.z);
+        this.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
     }
 
 
