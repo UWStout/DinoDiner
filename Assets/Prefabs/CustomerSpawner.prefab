@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1250856822061703927}
+  - component: {fileID: 151654687983939436}
   m_Layer: 0
   m_Name: CustomerSpawner
   m_TagString: Untagged
@@ -24,9 +25,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9130148268941924568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.91268337, y: 0.41451713, z: -1100.6895}
+  m_LocalPosition: {x: -10, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &151654687983939436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9130148268941924568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b375757fda9c9664ab3d703a387859fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnrate: 0
+  pool:
+  - {fileID: 2468568104487229501, guid: f3f76c91c16193d488d34c17713c01eb, type: 3}
+  - {fileID: 2468568104487229501, guid: af9e1182f9032164e9f54ea6fa38f260, type: 3}
+  - {fileID: 2468568104487229501, guid: 2b330c4fdf9837044b458cbe94dbb2c4, type: 3}
