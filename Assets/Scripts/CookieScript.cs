@@ -4,19 +4,39 @@ using UnityEngine;
 
 public class CookieScript : MonoBehaviour
 {
+    public GameManager gameManager;
     public int speed = 5;
+    public Rigidbody2D rb2d;
 
 
     // Start is called before the first frame update
     void Start()
     {
+<<<<<<< HEAD
         //this.velocity
+=======
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        rb2d = this.GetComponent<Rigidbody2D>();
+        rb2d.AddForce(new Vector2(-speed*100, 0));
+>>>>>>> 7acb2746e2bc44ee28800ac67090ef9055389569
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y, this.transform.position.z);
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Customer")
+        {
+            collision.gameObject.SetActive(false);
+            Destroy(collision.gameObject);
+            Destroy(this.gameObject);
+            gameManager.score++;
+            gameManager.setScoreCountText();
+            
+        }
     }
 }
