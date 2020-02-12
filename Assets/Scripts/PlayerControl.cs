@@ -9,8 +9,6 @@ public class PlayerControl : MonoBehaviour
     private float speed;
     private float velx;
     private float vely;
-    private float friction;
-    private float changespeed;
     // public GameManager gameManager;
 
     private float BigCook;
@@ -27,7 +25,6 @@ public class PlayerControl : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         speed = 2.0f;
-        friction = .8f;
         //anim = GetComponent<Animator>();
         BigCook = 0;
         SmallCook = 0;
@@ -43,7 +40,7 @@ public class PlayerControl : MonoBehaviour
 
         CheckInput();
 
-        if (BigStart == true && BigTimer < 3)
+        if (BigStart == true && BigTimer < 7)
         {
             BigTimer += Time.deltaTime;
         }
@@ -52,6 +49,20 @@ public class PlayerControl : MonoBehaviour
             SmallTimer += Time.deltaTime;
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            print(SmallCook + "Small cook");
+            print(BigCook + " big cook");
+        }
+
+        if (BigTimer > 7)
+        {
+            print("big is done");
+        }
+        if (SmallTimer > 3)
+        {
+            print("small is done");
+        }
     }
 
     //gets player input
@@ -88,12 +99,14 @@ public class PlayerControl : MonoBehaviour
    
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Bigtrigger" && Input.GetKeyDown(KeyCode.E))
+        if (collision.gameObject.name == "BigTrigger")
         {
             if (Input.GetKeyDown(KeyCode.E) && BigTimer >= 7)
             {
                 BigCook += 1;
                 BigTimer = 0;
+                print(BigCook + "big cookie amount is this");
+                BigStart = false;
             }
             else if (Input.GetKeyDown(KeyCode.E) && BigTimer == 0)
             {
@@ -101,17 +114,26 @@ public class PlayerControl : MonoBehaviour
             }
             
         }
-        else if (collision.gameObject.name == "SmallTrigger" && Input.GetKeyDown(KeyCode.E))
+        else if (collision.gameObject.name == "SmallTrigger")
         {
+
             if (Input.GetKeyDown(KeyCode.E) && SmallTimer >= 3)
             {
                 SmallCook += 1;
                 SmallTimer = 0;
+                print(SmallCook + "Small cookies count is this");
+                SmallStart = false;
             }
             else if (Input.GetKeyDown(KeyCode.E) && SmallTimer == 0)
             {
                 SmallStart = true;
             }
+
+        }
+        else if (collision.gameObject.tag == "BigPellet")
+        {
+            collision.gameObject.SetActive(false);
+
         }
 
     }
