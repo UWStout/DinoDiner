@@ -1802,6 +1802,26 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 4997213096807057946, guid: 3a6848b255d785c43b55337950808285,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4997213096807057946, guid: 3a6848b255d785c43b55337950808285,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4997213096807057946, guid: 3a6848b255d785c43b55337950808285,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4997213096807057946, guid: 3a6848b255d785c43b55337950808285,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 293696321523666070, guid: 3a6848b255d785c43b55337950808285,
         type: 3}
       propertyPath: bakeSpeed

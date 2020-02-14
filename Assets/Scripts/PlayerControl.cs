@@ -39,14 +39,16 @@ public class PlayerControl : MonoBehaviour
         movePlayer();
     }
 
-    /** Movement function, feels somewhat floaty
-     *  No parameters
-     **/
+    /* Movement function, feels somewhat floaty because Input.GetAxis is a float between -1 and 1, so he has to speed up.
+     * Doing (int)Input.GetAxis("Horizontal") would cast it to an int, but then there's a delay between all movements while the float gets high enough to be cast to 1
+     *  Maybe doing a big if(Input.GetKey(KeyCode.(all the movement keys)) with setting the velocity in every if block would be less floaty, but that would slow things down as it would have to check all 8 keys every frame?
+     */
     private void movePlayer()
     {
         //get input axes
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
+        print("x: " + inputX + "y: " + inputY);
         // move player according to the axes
         movement = new Vector2(speed.x * inputX, speed.y * inputY);
         rb2D.velocity = movement;

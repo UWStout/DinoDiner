@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CustomerSpawnerScript : MonoBehaviour
 {
-    private int spawnrate;
     public GameObject[] pool;
 
 
