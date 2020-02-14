@@ -14,8 +14,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - deco
+  - other
   - 
   - 
   - 
@@ -39,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: deco
+    uniqueID: 3232299503
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
