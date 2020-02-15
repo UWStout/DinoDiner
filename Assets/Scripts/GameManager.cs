@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -39,11 +39,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
     }
 
     public void setScoreCountText()
     {
         scorecountText.text = "Score: " + score.ToString();
     }
-
 }

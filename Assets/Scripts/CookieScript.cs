@@ -22,7 +22,7 @@ public class CookieScript : MonoBehaviour
     {
 
     }
-
+    //  TODO if cookie is big cookie, push customer back a lot and delete customer. If cookie is small cookie, push back a little
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Customer")
