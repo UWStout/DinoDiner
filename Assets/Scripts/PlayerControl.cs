@@ -1,130 +1,124 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
     private Rigidbody2D rb2D;
+    private Vector2 movement;
+    // private Animator anim;
+    public int movespeed = 0;
+    private Vector2 speed;
+    // public GameManager gameManager;
    // private Animator anim;
-    private float speed;
     private float velx;
     private float vely;
-    private float friction;
-    private float changespeed;
-   // public GameManager gameManager;
 
-
+    private float BigCook;
+    private float SmallCook;
+    private float BigTimer;
+    private float SmallTimer;
+    private bool BigStart;
+    private bool SmallStart;
 
     // Use this for initialization
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        speed = 3.0f;
-        friction = .8f;
-        changespeed = 1f;
+        speed.Set(movespeed, movespeed);
         //anim = GetComponent<Animator>();
+        BigCook = 0;
+        SmallCook = 0;
+        BigTimer = 0;
+        SmallTimer = 0;
+        BigStart = false;
     }
+
 
     // Update is called once per frame
     void Update()
     {
-
-        CheckInput();
-
-     }
-
-    //gets player input
-    void CheckInput()
-    {
-        if (Input.GetAxisRaw("Vertical") > 0)
-        {
-           
-
-            vely += changespeed;
-            if (vely > speed)
-            {
-                if (vely < 0)
-                {
-                    vely = 0;
-                }
-                vely = speed;
-                
-            }
-        }
-        else if (Input.GetAxisRaw("Vertical") < 0)
-            {
-            vely -= changespeed;
-            if (vely < -speed)
-            {
-                if (vely > 0)
-                {
-                    vely = 0;
-                }
-                vely = -speed;
-            }
-        }
-        else
-        {
-            vely = 0;
-        }
-
-        if (Input.GetAxisRaw("Horizontal") > 0)
-        {
-            velx += changespeed;
-            if (velx > speed)
-            {
-                if (velx < 0)
-                {
-                    velx = 0;
-                }
-                velx = speed;
-            }
-        }
-        else if (Input.GetAxisRaw("Horizontal") < 0)
-        {
-            velx -= changespeed;
-            if (velx < -speed)
-            {
-                if (velx > 0)
-                {
-                  velx = 0;
-                }
-                velx = -speed;
-            }
-        }
-
-        //do the angle between velx and vely
-
-       //Vector2.Angle((velx,0.0f), vely);
-
-
-        rb2D.AddForce(new Vector2(velx, vely));
-        print("velx" + velx);
-        print("vely" + vely);
-
+        movePlayer();
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    /* Movement function, feels somewhat floaty because Input.GetAxis is a float between -1 and 1, so he has to speed up.
+     * Doing (int)Input.GetAxis("Horizontal") would cast it to an int, but then there's a delay between all movements while the float gets high enough to be cast to 1
+     *  Maybe doing a big if(Input.GetKey(KeyCode.(all the movement keys)) with setting the velocity in every if block would be less floaty, but that would slow things down as it would have to check all 8 keys every frame?
+     */
+    private void movePlayer()
     {
-        if (collision.gameObject.name == "ExitLeft")
+        //get input axes
+        float inputX = Input.GetAxis("Horizontal");
+        float inputY = Input.GetAxis("Vertical");
+        print("x: " + inputX + "y: " + inputY);
+        // move player according to the axes
+        movement = new Vector2(speed.x * inputX, speed.y * inputY);
+        rb2D.velocity = movement;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) { 
+        if (BigStart == true && BigTimer < 7)
         {
-            transform.position = new Vector2(13.5f, -0.5f);
+            BigTimer += Time.deltaTime;
         }
-        else if (collision.gameObject.name == "ExitRight")
+        if (SmallStart == true && SmallTimer < 3)
         {
-            transform.position = new Vector2(-13.5f, -0.5f);
+            SmallTimer += Time.deltaTime;
         }
-        else if (collision.gameObject.tag == "SmallPellet")
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            print(SmallCook + "Small cook");
+            print(BigCook + " big cook");
+        }
+
+        if (BigTimer > 7)
+        {
+            print("big is done");
+        }
+        if (SmallTimer > 3)
+        {
+            print("small is done");
+        }
+    }
+   
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "BigTrigger")
+        {
+            if (Input.GetKeyDown(KeyCode.E) && BigTimer >= 7)
+            {
+                BigCook += 1;
+                BigTimer = 0;
+                print(BigCook + "big cookie amount is this");
+                BigStart = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.E) && BigTimer == 0)
+            {
+                BigStart = true;
+            }
+            
+        }
+        else if (collision.gameObject.name == "SmallTrigger")
         {
 
+            if (Input.GetKeyDown(KeyCode.E) && SmallTimer >= 3)
+            {
+                SmallCook += 1;
+                SmallTimer = 0;
+                print(SmallCook + "Small cookies count is this");
+                SmallStart = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.E) && SmallTimer == 0)
+            {
+                SmallStart = true;
+            }
+
+        }
         else if (collision.gameObject.tag == "BigPellet")
         {
             collision.gameObject.SetActive(false);
+
         }
 
     }
-
-
 
 }

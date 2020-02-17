@@ -12,13 +12,9 @@ public class CookieScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-<<<<<<< HEAD
-        //this.velocity
-=======
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb2d = this.GetComponent<Rigidbody2D>();
         rb2d.AddForce(new Vector2(-speed*100, 0));
->>>>>>> 7acb2746e2bc44ee28800ac67090ef9055389569
     }
 
     // Update is called once per frame
@@ -26,7 +22,7 @@ public class CookieScript : MonoBehaviour
     {
 
     }
-
+    //  TODO if cookie is big cookie, push customer back a lot and delete customer. If cookie is small cookie, push back a little
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Customer")
