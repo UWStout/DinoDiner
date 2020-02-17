@@ -38,11 +38,14 @@ public class PlayerControl : MonoBehaviour
         locations[2].Set(2, 3);
         locations[3].Set(2, 0);
         locations[4].Set(2, -3);
-       
+
+        this.transform.position = locations[0];
+
     }
 
 
-    // Update is called once per frame
+    // Update is called once per frame, depends on framerate
+    //FixedUpdate is independant of framerate
     void FixedUpdate()
     {
         movePlayer(); 
@@ -54,6 +57,9 @@ public class PlayerControl : MonoBehaviour
      */
     private void movePlayer()
     {
+
+
+
         //get input axes
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
