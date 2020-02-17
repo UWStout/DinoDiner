@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CustomerMovementScript: MonoBehaviour
 {
-    public float speed = 5;
+    public float speed = 5; //Higher numbers mean slower movement!
 
     // Start is called before the first frame update
     void Start()

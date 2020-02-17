@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2468568104487229488}
   - component: {fileID: 4272976390065785929}
   m_Layer: 0
-  m_Name: Cust_Stego
+  m_Name: Cust_Bronto
   m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1f27e65493af8654f9545cc37ac0facf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 82865fdc475c8d84b822f097729501aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76e96523e530ba847bc003c1c52e7d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 10
 --- !u!70 &4272976390065785929
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -108,6 +108,6 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.75}
   m_Size: {x: 8, y: 3.5}
   m_Direction: 1
