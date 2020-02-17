@@ -4,11 +4,11 @@ public class PlayerControl : MonoBehaviour
 {
     private Rigidbody2D rb2D;
     private Vector2 movement;
+    private SpriteRenderer sprite;
     // private Animator anim;
-    public int movespeed = 0;
     private Vector2 speed;
-    // public GameManager gameManager;
-   // private Animator anim;
+    public GameManager gameManager;
+    // private Animator anim;
     private float velx;
     private float vely;
 
@@ -19,28 +19,34 @@ public class PlayerControl : MonoBehaviour
     private bool BigStart;
     private bool SmallStart;
 
-    public Vector2[] locations = new Vector2[5];
+    public OvenScript bigOven;
+    public OvenScript smallOven;
+
+    public Vector3[] locations = new Vector3[5];
+    private Vector3 temp = new Vector3();
 
     // Use this for initialization
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+
         rb2D = GetComponent<Rigidbody2D>();
-        speed.Set(movespeed, movespeed);
         //anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
         BigCook = 0;
         SmallCook = 0;
         BigTimer = 0;
         SmallTimer = 0;
         BigStart = false;
 
-        locations[0].Set(6, 3);
-        locations[1].Set(6, -3);
-        locations[2].Set(2, 3);
-        locations[3].Set(2, 0);
-        locations[4].Set(2, -3);
+        locations[0].Set(6f, 3f, 0f);
+        locations[1].Set(6f, -3f, 0f);
+        locations[2].Set(2f, 3f, 0f);
+        locations[3].Set(2f, 0f, 0f);
+        locations[4].Set(2f, -3f, 0f);
 
-        this.transform.position = locations[0];
-
+        this.transform.position = locations[3];
     }
 
 
@@ -48,7 +54,8 @@ public class PlayerControl : MonoBehaviour
     //FixedUpdate is independant of framerate
     void FixedUpdate()
     {
-        movePlayer(); 
+        movePlayer();
+        interactPlayer();
     }
 
     /* Movement function, feels somewhat floaty because Input.GetAxis is a float between -1 and 1, so he has to speed up.
@@ -57,44 +64,92 @@ public class PlayerControl : MonoBehaviour
      */
     private void movePlayer()
     {
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (this.transform.position.y <= 0)
+            {
+                temp.Set(this.transform.position.x, this.transform.position.y + 3, 0);
+                this.transform.position = temp;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (this.transform.position.y >= 0)
+            {
+                temp.Set(this.transform.position.x, this.transform.position.y - 3, 0);
+                this.transform.position = temp;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (this.transform.position.x >= 4)
+            {
+                temp.Set(this.transform.position.x - 2, this.transform.position.y, 0);
+                this.transform.position = temp;
+                sprite.flipX = false;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (this.transform.position.x <= 4)
+            {
+                temp.Set(this.transform.position.x + 2, this.transform.position.y, 0);
+                this.transform.position = temp;
+                sprite.flipX = true;
+            }
+        }
 
 
 
-        //get input axes
-        float inputX = Input.GetAxis("Horizontal");
-        float inputY = Input.GetAxis("Vertical");
-        print("x: " + inputX + "y: " + inputY);
-        // move player according to the axes
-        movement = new Vector2(speed.x * inputX, speed.y * inputY);
-        rb2D.velocity = movement;
+
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) { 
-        if (BigStart == true && BigTimer < 7)
-        {
-            BigTimer += Time.deltaTime;
-        }
-        if (SmallStart == true && SmallTimer < 3)
-        {
-            SmallTimer += Time.deltaTime;
-        }
-
+    private void interactPlayer()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            print(SmallCook + "Small cook");
-            print(BigCook + " big cook");
-        }
 
-        if (BigTimer > 7)
-        {
-            print("big is done");
-        }
-        if (SmallTimer > 3)
-        {
-            print("small is done");
+            if (this.transform.position == locations[0])
+            {
+                if (!smallOven.baking)
+                {
+                    smallOven.bakeCommand();
+                }
+                if (smallOven.done)
+                {
+                    gameManager.smallCookies += 3;
+                }
+                if (bigOven.burned)
+                {
+                    bigOven.resetVars();
+                }
+            }
+
+            if (this.transform.position == locations[1])
+            {
+                if (!bigOven.baking)
+                {
+                    bigOven.bakeCommand();
+                }
+                if (bigOven.done)
+                {
+                    //if it's done, restock;
+                }
+                if (bigOven.burned)
+                {
+                    bigOven.resetVars();
+                }
+
+            }
+
+
+            //serve cookies!
+
+
         }
     }
-   
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.name == "BigTrigger")
@@ -110,7 +165,7 @@ public class PlayerControl : MonoBehaviour
             {
                 BigStart = true;
             }
-            
+
         }
         else if (collision.gameObject.name == "SmallTrigger")
         {
