@@ -19,6 +19,8 @@ public class PlayerControl : MonoBehaviour
     private bool BigStart;
     private bool SmallStart;
 
+    public Vector2[] locations = new Vector2[5];
+
     // Use this for initialization
     void Start()
     {
@@ -30,11 +32,18 @@ public class PlayerControl : MonoBehaviour
         BigTimer = 0;
         SmallTimer = 0;
         BigStart = false;
+
+        locations[0].Set(6, 3);
+        locations[1].Set(6, -3);
+        locations[2].Set(2, 3);
+        locations[3].Set(2, 0);
+        locations[4].Set(2, -3);
+       
     }
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         movePlayer();
     }
