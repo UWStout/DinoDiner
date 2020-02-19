@@ -21,19 +21,22 @@ public class OvenScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if (baking)
         {
+            print("timeleft= "+ timeLeft + " done=" + done + " baking=" + baking + " burned=" + burned);
+
             timeLeft -= Time.deltaTime;
-            if ((timeLeft <= 0) || (timeLeft >= -3))
+
+            if (timeLeft <= 0)
             {
                 done = true;
             }
-            else if (timeLeft < -3)
+            if (timeLeft <= -3)
             {
-                done = false;
+                done = true;
                 burned = true;
                 baking = false;
-                timeLeft = 0;
             }
         }
     }
@@ -49,5 +52,6 @@ public class OvenScript : MonoBehaviour
         baking = false;
         done = false;
         burned = false;
+        timeLeft = 0;
     }
 }

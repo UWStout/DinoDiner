@@ -24,11 +24,13 @@ public class PlayerControl : MonoBehaviour
 
     public Vector3[] locations = new Vector3[5];
     private Vector3 temp = new Vector3();
+    private Vector3 scale = new Vector3();
 
     // Use this for initialization
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        // if the GameManager is unbound in the editor, the below will bind it
+       // gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 
         rb2D = GetComponent<Rigidbody2D>();
@@ -70,6 +72,8 @@ public class PlayerControl : MonoBehaviour
             {
                 temp.Set(this.transform.position.x, this.transform.position.y + 3, 0);
                 this.transform.position = temp;
+                scale.Set(this.transform.localScale.x - .15f, this.transform.localScale.y - .15f, this.transform.localScale.z - .15f);
+                this.transform.localScale = scale;
             }
         }
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
@@ -78,6 +82,8 @@ public class PlayerControl : MonoBehaviour
             {
                 temp.Set(this.transform.position.x, this.transform.position.y - 3, 0);
                 this.transform.position = temp;
+                scale.Set(this.transform.localScale.x + .15f, this.transform.localScale.y + .15f, this.transform.localScale.z + .15f);
+                this.transform.localScale = scale;
             }
         }
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
@@ -99,7 +105,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-
+        
 
 
 
