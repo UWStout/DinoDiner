@@ -31,7 +31,7 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         // if the GameManager is unbound in the editor, the below will bind it
-       // gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        // gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 
         rb2D = GetComponent<Rigidbody2D>();
@@ -110,7 +110,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        
+
 
 
 
@@ -121,7 +121,7 @@ public class PlayerControl : MonoBehaviour
         //this function is for baking and serving
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
+            //if the player is in front of the small oven they can interact with it
             if (this.transform.position == locations[0])
             {
                 if (!smallOven.baking)
@@ -132,9 +132,9 @@ public class PlayerControl : MonoBehaviour
                 {
                     gameManager.smallCookies += 3;
                 }
-                if (bigOven.burned)
+                if (smallOven.burned)
                 {
-                    bigOven.resetVars();
+                    smallOven.resetVars();
                 }
             }
 
@@ -156,9 +156,24 @@ public class PlayerControl : MonoBehaviour
 
             }
 
-            else
+            else if (this.transform.position == locations[2] || this.transform.position == locations[3] || this.transform.position == locations[4])
             {
-                ThrowCook();
+                if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.C) && SmallCook != 0)
+                {
+                    Rigidbody2D clone;
+                    clone = Instantiate(Smallbox, transform.position, transform.rotation);
+                    clone.AddForce(temp);
+                    SmallCook--;
+
+                }
+                //if Q is pressed, player throws a big cookie and reduces big cookie count
+                if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.V) && BigCook != 0)
+                {
+                    Rigidbody2D clone2;
+                    clone2 = Instantiate(Bigbox, transform.position, transform.rotation);
+                    clone2.AddForce(temp);
+                    BigCook--;
+                }
             }
 
             //serve cookies!
@@ -203,24 +218,5 @@ public class PlayerControl : MonoBehaviour
 
     }
 
-    void ThrowCook()
-    {
-        //if E is pressed then it throws a small cookie then reduces inventory of cookie
-        if (Input.GetKeyDown(KeyCode.E) && SmallCook != 0)
-        {
-            Rigidbody2D clone;
-            clone = Instantiate(Smallbox, transform.position, transform.rotation);
-            clone.AddForce(temp);
-            SmallCook--;
 
-        }
-        //if Q is pressed, player throws a big cookie and reduces big cookie count
-        if (Input.GetKeyDown(KeyCode.Q) && BigCook != 0)
-        {
-            Rigidbody2D clone2;
-            clone2 = Instantiate(Bigbox, transform.position, transform.rotation);
-            clone2.AddForce(temp);
-            BigCook--;
-        }
-    }
 }
