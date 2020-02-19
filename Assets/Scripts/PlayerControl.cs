@@ -9,8 +9,9 @@ public class PlayerControl : MonoBehaviour
     private Vector2 speed;
     public GameManager gameManager;
     // private Animator anim;
-    private float velx;
-    private float vely;
+    public Rigidbody2D Bigbox;
+    public Rigidbody2D Smallbox;
+    Vector2 CookieSpeed;
 
     private float BigCook;
     private float SmallCook;
@@ -41,6 +42,7 @@ public class PlayerControl : MonoBehaviour
         BigTimer = 0;
         SmallTimer = 0;
         BigStart = false;
+        CookieSpeed = new Vector2(-1.0f, 0.0f);
 
         locations[0].Set(6f, 3f, 0f);
         locations[1].Set(6f, -3f, 0f);
@@ -66,12 +68,15 @@ public class PlayerControl : MonoBehaviour
      */
     private void movePlayer()
     {
+        //this function gets input either from wasd or the arrow keys. all the if statements do the same thing except change where the player moves and the size it is
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (this.transform.position.y <= 0)
             {
+                //these two lines are to change the position of the player character 
                 temp.Set(this.transform.position.x, this.transform.position.y + 3, 0);
                 this.transform.position = temp;
+                //this changes the size of the player model to give the play area depth
                 scale.Set(this.transform.localScale.x - .15f, this.transform.localScale.y - .15f, this.transform.localScale.z - .15f);
                 this.transform.localScale = scale;
             }
@@ -113,6 +118,7 @@ public class PlayerControl : MonoBehaviour
 
     private void interactPlayer()
     {
+        //this function is for baking and serving
         if (Input.GetKeyDown(KeyCode.Space))
         {
 
@@ -132,7 +138,7 @@ public class PlayerControl : MonoBehaviour
                 }
             }
 
-            if (this.transform.position == locations[1])
+            else if (this.transform.position == locations[1])
             {
                 if (!bigOven.baking)
                 {
@@ -140,6 +146,7 @@ public class PlayerControl : MonoBehaviour
                 }
                 if (bigOven.done)
                 {
+                    gameManager.bigCookies += 3;
                     //if it's done, restock;
                 }
                 if (bigOven.burned)
@@ -149,6 +156,10 @@ public class PlayerControl : MonoBehaviour
 
             }
 
+            else
+            {
+                ThrowCook();
+            }
 
             //serve cookies!
 
@@ -189,12 +200,27 @@ public class PlayerControl : MonoBehaviour
             }
 
         }
-        else if (collision.gameObject.tag == "BigPellet")
-        {
-            collision.gameObject.SetActive(false);
-
-        }
 
     }
 
+    void ThrowCook()
+    {
+        //if E is pressed then it throws a small cookie then reduces inventory of cookie
+        if (Input.GetKeyDown(KeyCode.E) && SmallCook != 0)
+        {
+            Rigidbody2D clone;
+            clone = Instantiate(Smallbox, transform.position, transform.rotation);
+            clone.AddForce(temp);
+            SmallCook--;
+
+        }
+        //if Q is pressed, player throws a big cookie and reduces big cookie count
+        if (Input.GetKeyDown(KeyCode.Q) && BigCook != 0)
+        {
+            Rigidbody2D clone2;
+            clone2 = Instantiate(Bigbox, transform.position, transform.rotation);
+            clone2.AddForce(temp);
+            BigCook--;
+        }
+    }
 }
