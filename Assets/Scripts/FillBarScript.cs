@@ -8,8 +8,10 @@ public class FillBarScript : MonoBehaviour
     // Unity UI references
     public Slider slider;
     //public Text displayText;
+    public OvenScript linkedOven;
+    public Image fillBar;
 
-    private float currentValue = 0f;
+    private float currentValue = 1f;
     public float CurrentValue
     {
         get
@@ -27,12 +29,20 @@ public class FillBarScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CurrentValue = 0f;
+        CurrentValue = 1f;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        CurrentValue += 0.0043f;
+        if (linkedOven.baking)
+        {
+            CurrentValue = (linkedOven.timeLeft / linkedOven.bakeSpeed);
+            if (CurrentValue < 0)
+            {
+                //slowly turn the bar red
+                //temp comment
+            }
+        }
     }
 }

@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public int score = 0;
     public Text scorecountText;
+    public int smallCookies = 0;
+    public int bigCookies = 0;
 
     //awake is called before start
     private void Awake()

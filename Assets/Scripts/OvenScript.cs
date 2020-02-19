@@ -1,12 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OvenScript : MonoBehaviour
 {
     public float bakeSpeed = 0;
+    public float timeLeft = 0;
     public GameObject cookieType;
     public int numCookies = 0;
+    public bool baking = false;
+    public bool done = false;
+    public bool burned = false;
 
     // Start is called before the first frame update
     void Start()
@@ -17,8 +19,39 @@ public class OvenScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+
+        if (baking)
+        {
+            print("timeleft= "+ timeLeft + " done=" + done + " baking=" + baking + " burned=" + burned);
+
+            timeLeft -= Time.deltaTime;
+
+            if (timeLeft <= 0)
+            {
+                done = true;
+            }
+            if (timeLeft <= -3)
+            {
+                done = true;
+                burned = true;
+                baking = false;
+            }
+        }
+    }
+
+    public void bakeCommand()
+    {
+        timeLeft = bakeSpeed;
+        baking = true;
+    }
+
+    public void resetVars()
+    {
+        baking = false;
+        done = false;
+        burned = false;
+        timeLeft = 0;
     }
 }
