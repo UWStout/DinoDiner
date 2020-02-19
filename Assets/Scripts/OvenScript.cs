@@ -8,7 +8,9 @@ public class OvenScript : MonoBehaviour
     public int numCookies = 0;
     public bool baking = false;
     public bool done = false;
+    public bool burning = false;
     public bool burned = false;
+    public GameObject linkedHandle;
 
     // Start is called before the first frame update
     void Start()
@@ -21,22 +23,22 @@ public class OvenScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         if (baking)
         {
+            linkedHandle.SetActive(true);
             print("timeleft= "+ timeLeft + " done=" + done + " baking=" + baking + " burned=" + burned);
 
             timeLeft -= Time.deltaTime;
 
-            if (timeLeft <= 0)
+            if (timeLeft <= 0 )
             {
                 done = true;
+                burning = true;
             }
-            if (timeLeft <= -3)
+            if (timeLeft < -bakeSpeed)
             {
-                done = true;
+                done = false;
                 burned = true;
-                baking = false;
             }
         }
     }
@@ -51,7 +53,10 @@ public class OvenScript : MonoBehaviour
     {
         baking = false;
         done = false;
+        burning = false;
         burned = false;
         timeLeft = 0;
+        linkedHandle.SetActive(false);
+
     }
 }

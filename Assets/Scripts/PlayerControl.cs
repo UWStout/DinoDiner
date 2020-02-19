@@ -105,10 +105,6 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        
-
-
-
     }
 
     private void interactPlayer()
@@ -125,10 +121,11 @@ public class PlayerControl : MonoBehaviour
                 if (smallOven.done)
                 {
                     gameManager.smallCookies += 3;
+                    smallOven.resetVars();
                 }
-                if (bigOven.burned)
+                if (smallOven.burned)
                 {
-                    bigOven.resetVars();
+                    smallOven.resetVars();
                 }
             }
 
@@ -140,7 +137,8 @@ public class PlayerControl : MonoBehaviour
                 }
                 if (bigOven.done)
                 {
-                    //if it's done, restock;
+                    gameManager.bigCookies += 1;
+                    bigOven.resetVars();
                 }
                 if (bigOven.burned)
                 {
