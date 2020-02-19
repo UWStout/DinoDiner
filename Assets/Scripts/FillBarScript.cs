@@ -41,6 +41,7 @@ public class FillBarScript : MonoBehaviour
             if (CurrentValue < 0)
             {
                 //slowly turn the bar red
+                //temp comment
             }
         }
     }
