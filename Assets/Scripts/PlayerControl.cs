@@ -71,18 +71,15 @@ public class PlayerControl : MonoBehaviour
         //this function gets input either from wasd or the arrow keys. all the if statements do the same thing except change where the player moves and the size it is
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         { 
-           
             pos -= 2;
 
         }
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-           
             pos += 2;
         }
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-           
             pos -= 1;
             if (pos == -1)
             {
@@ -91,15 +88,12 @@ public class PlayerControl : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            
             pos += 1;
             if (pos == 5)
             {
                 pos = 0;
             }
-           
         }
-
         if(pos == 5)
         {
             pos = 1;
@@ -119,18 +113,6 @@ public class PlayerControl : MonoBehaviour
 
         rb2D.position = locations[pos];
 
-        if (pos == 0)
-        {
-            sprite.size = new Vector2(.7f, .7f);
-        }
-        if (pos == 4)
-        {
-            sprite.size = new Vector2(1.3f, 1.3f);
-        }
-        if (pos == 1 || pos == 2 || pos == 3)
-        {
-            sprite.size = new Vector2(1f, 1f);
-        }
         if (pos == 1 || pos == 3)
         {
             sprite.flipX = true;
@@ -147,7 +129,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //if the player is in front of the small oven they can interact with it
-            if (this.transform.position == locations[0])
+            if (this.transform.position == locations[1])
             {
                 if (!smallOven.baking)
                 {
@@ -165,7 +147,7 @@ public class PlayerControl : MonoBehaviour
                 }
             }
 
-            else if (this.transform.position == locations[1])
+            else if (this.transform.position == locations[3])
             {
                 if (!bigOven.baking)
                 {
@@ -186,7 +168,7 @@ public class PlayerControl : MonoBehaviour
             }
 
         }
-        if (this.transform.position == locations[2] || this.transform.position == locations[3] || this.transform.position == locations[4])
+        if (this.transform.position == locations[2] || this.transform.position == locations[0] || this.transform.position == locations[4])
          {
 
             if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.C))
