@@ -110,10 +110,13 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
+<<<<<<< HEAD
+=======
 
 
 
 
+>>>>>>> f4ad2b039b7ea3a407ffe408abb8b43312e7b000
     }
 
     private void interactPlayer()
@@ -131,6 +134,7 @@ public class PlayerControl : MonoBehaviour
                 if (smallOven.done)
                 {
                     gameManager.smallCookies += 3;
+                    smallOven.resetVars();
                 }
                 if (smallOven.burned)
                 {
@@ -146,8 +150,13 @@ public class PlayerControl : MonoBehaviour
                 }
                 if (bigOven.done)
                 {
+<<<<<<< HEAD
+                    gameManager.bigCookies += 1;
+                    bigOven.resetVars();
+=======
                     gameManager.bigCookies += 3;
                     //if it's done, restock;
+>>>>>>> f4ad2b039b7ea3a407ffe408abb8b43312e7b000
                 }
                 if (bigOven.burned)
                 {
