@@ -42,7 +42,7 @@ public class PlayerControl : MonoBehaviour
         BigTimer = 0;
         SmallTimer = 0;
         BigStart = false;
-        CookieSpeed = new Vector2(-1.0f, 0.0f);
+        CookieSpeed = new Vector2(-50.0f, 0.0f);
 
         locations[0].Set(6f, 3f, 0f);
         locations[1].Set(6f, -3f, 0f);
@@ -110,13 +110,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-<<<<<<< HEAD
-=======
 
-
-
-
->>>>>>> f4ad2b039b7ea3a407ffe408abb8b43312e7b000
     }
 
     private void interactPlayer()
@@ -150,13 +144,13 @@ public class PlayerControl : MonoBehaviour
                 }
                 if (bigOven.done)
                 {
-<<<<<<< HEAD
+
                     gameManager.bigCookies += 1;
                     bigOven.resetVars();
-=======
+
                     gameManager.bigCookies += 3;
                     //if it's done, restock;
->>>>>>> f4ad2b039b7ea3a407ffe408abb8b43312e7b000
+
                 }
                 if (bigOven.burned)
                 {
@@ -165,67 +159,44 @@ public class PlayerControl : MonoBehaviour
 
             }
 
-            else if (this.transform.position == locations[2] || this.transform.position == locations[3] || this.transform.position == locations[4])
+            
+
+           
+
+
+        }
+        if (this.transform.position == locations[2] || this.transform.position == locations[3] || this.transform.position == locations[4])
+         {
+
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.C))
             {
-                if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.C) && SmallCook != 0)
+                print("E has been pressed" + SmallCook);
+                if (SmallCook > 0)
                 {
+                    print("throwing small cookie" + SmallCook);
                     Rigidbody2D clone;
                     clone = Instantiate(Smallbox, transform.position, transform.rotation);
-                    clone.AddForce(temp);
+                    clone.AddForce(CookieSpeed);
                     SmallCook--;
 
                 }
-                //if Q is pressed, player throws a big cookie and reduces big cookie count
-                if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.V) && BigCook != 0)
+            }
+            //if Q is pressed, player throws a big cookie and reduces big cookie count
+            if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.V))
+            {
+                print("Q has been pressed" + BigCook);
+                if (BigCook > 0)
                 {
+                    print("throwing big cookie" + BigCook);
                     Rigidbody2D clone2;
                     clone2 = Instantiate(Bigbox, transform.position, transform.rotation);
-                    clone2.AddForce(temp);
+                    clone2.AddForce(CookieSpeed);
                     BigCook--;
                 }
             }
-
-            //serve cookies!
-
-
-        }
+         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "BigTrigger")
-        {
-            if (Input.GetKeyDown(KeyCode.E) && BigTimer >= 7)
-            {
-                BigCook += 1;
-                BigTimer = 0;
-                print(BigCook + "big cookie amount is this");
-                BigStart = false;
-            }
-            else if (Input.GetKeyDown(KeyCode.E) && BigTimer == 0)
-            {
-                BigStart = true;
-            }
-
-        }
-        else if (collision.gameObject.name == "SmallTrigger")
-        {
-
-            if (Input.GetKeyDown(KeyCode.E) && SmallTimer >= 3)
-            {
-                SmallCook += 1;
-                SmallTimer = 0;
-                print(SmallCook + "Small cookies count is this");
-                SmallStart = false;
-            }
-            else if (Input.GetKeyDown(KeyCode.E) && SmallTimer == 0)
-            {
-                SmallStart = true;
-            }
-
-        }
-
-    }
 
 
 }
