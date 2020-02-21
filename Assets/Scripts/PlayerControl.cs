@@ -66,10 +66,6 @@ public class PlayerControl : MonoBehaviour
         BigCook = gameManager.bigCookies;
     }
 
-    /* Movement function, feels somewhat floaty because Input.GetAxis is a float between -1 and 1, so he has to speed up.
-     * Doing (int)Input.GetAxis("Horizontal") would cast it to an int, but then there's a delay between all movements while the float gets high enough to be cast to 1
-     *  Maybe doing a big if(Input.GetKey(KeyCode.(all the movement keys)) with setting the velocity in every if block would be less floaty, but that would slow things down as it would have to check all 8 keys every frame?
-     */
     private void movePlayer()
     {
         //this function gets input either from wasd or the arrow keys. all the if statements do the same thing except change where the player moves and the size it is
@@ -143,8 +139,6 @@ public class PlayerControl : MonoBehaviour
         {
             sprite.flipX = false;
         }
-
-
     }
 
     private void interactPlayer()
@@ -162,6 +156,7 @@ public class PlayerControl : MonoBehaviour
                 if (smallOven.done)
                 {
                     gameManager.smallCookies += 3;
+                    gameManager.setText();
                     smallOven.resetVars();
                 }
                 if (smallOven.burned)
@@ -180,11 +175,8 @@ public class PlayerControl : MonoBehaviour
                 {
 
                     gameManager.bigCookies += 1;
+                    gameManager.setText();
                     bigOven.resetVars();
-
-                    gameManager.bigCookies += 3;
-                    //if it's done, restock;
-
                 }
                 if (bigOven.burned)
                 {
@@ -192,11 +184,6 @@ public class PlayerControl : MonoBehaviour
                 }
 
             }
-
-            
-
-           
-
 
         }
         if (this.transform.position == locations[2] || this.transform.position == locations[3] || this.transform.position == locations[4])
@@ -230,7 +217,4 @@ public class PlayerControl : MonoBehaviour
             }
          }
     }
-
-
-
 }
