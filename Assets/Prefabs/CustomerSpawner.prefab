@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b375757fda9c9664ab3d703a387859fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnrate: 0
   pool:
   - {fileID: 2468568104487229501, guid: f3f76c91c16193d488d34c17713c01eb, type: 3}
   - {fileID: 2468568104487229501, guid: af9e1182f9032164e9f54ea6fa38f260, type: 3}
   - {fileID: 2468568104487229501, guid: 2b330c4fdf9837044b458cbe94dbb2c4, type: 3}
+  scale: 1

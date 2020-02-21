@@ -105,11 +105,6 @@ public class PlayerControl : MonoBehaviour
                 sprite.flipX = true;
             }
         }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 9efa6219baeb65064ac7aca9d8321a1366800c9d
     }
 
     private void interactPlayer()
@@ -156,11 +151,6 @@ public class PlayerControl : MonoBehaviour
 
             }
 
-            
-
-           
-
-
         }
         if (this.transform.position == locations[2] || this.transform.position == locations[3] || this.transform.position == locations[4])
          {
@@ -193,10 +183,4 @@ public class PlayerControl : MonoBehaviour
             }
          }
     }
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 9efa6219baeb65064ac7aca9d8321a1366800c9d
 }
