@@ -5,6 +5,8 @@ using UnityEngine;
 public class CustomerSpawnerScript : MonoBehaviour
 {
     public GameObject[] pool;
+    private GameObject clone;
+    int wait_time;
 
 
     // Start is called before the first frame update
@@ -22,7 +24,7 @@ public class CustomerSpawnerScript : MonoBehaviour
 
     IEnumerator spawnCustomer()
     {
-        int wait_time;
+        
         while (true)
         {
             wait_time = Random.Range(0, 20);

@@ -123,6 +123,7 @@ public class PlayerControl : MonoBehaviour
                 if (smallOven.done)
                 {
                     gameManager.smallCookies += 3;
+                    gameManager.setText();
                     smallOven.resetVars();
                 }
                 if (smallOven.burned)
@@ -140,6 +141,7 @@ public class PlayerControl : MonoBehaviour
                 if (bigOven.done)
                 {
                     gameManager.bigCookies += 1;
+                    gameManager.setText();
                     bigOven.resetVars();
                 }
                 if (bigOven.burned)
@@ -174,42 +176,5 @@ public class PlayerControl : MonoBehaviour
 
         }
     }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "BigTrigger")
-        {
-            if (Input.GetKeyDown(KeyCode.E) && BigTimer >= 7)
-            {
-                BigCook += 1;
-                BigTimer = 0;
-                print(BigCook + "big cookie amount is this");
-                BigStart = false;
-            }
-            else if (Input.GetKeyDown(KeyCode.E) && BigTimer == 0)
-            {
-                BigStart = true;
-            }
-
-        }
-        else if (collision.gameObject.name == "SmallTrigger")
-        {
-
-            if (Input.GetKeyDown(KeyCode.E) && SmallTimer >= 3)
-            {
-                SmallCook += 1;
-                SmallTimer = 0;
-                print(SmallCook + "Small cookies count is this");
-                SmallStart = false;
-            }
-            else if (Input.GetKeyDown(KeyCode.E) && SmallTimer == 0)
-            {
-                SmallStart = true;
-            }
-
-        }
-
-    }
-
 
 }
