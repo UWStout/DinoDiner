@@ -62,10 +62,6 @@ public class PlayerControl : MonoBehaviour
         interactPlayer();
     }
 
-    /* Movement function, feels somewhat floaty because Input.GetAxis is a float between -1 and 1, so he has to speed up.
-     * Doing (int)Input.GetAxis("Horizontal") would cast it to an int, but then there's a delay between all movements while the float gets high enough to be cast to 1
-     *  Maybe doing a big if(Input.GetKey(KeyCode.(all the movement keys)) with setting the velocity in every if block would be less floaty, but that would slow things down as it would have to check all 8 keys every frame?
-     */
     private void movePlayer()
     {
         //this function gets input either from wasd or the arrow keys. all the if statements do the same thing except change where the player moves and the size it is
@@ -110,13 +106,6 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> f4ad2b039b7ea3a407ffe408abb8b43312e7b000
     }
 
     private void interactPlayer()
@@ -150,13 +139,8 @@ public class PlayerControl : MonoBehaviour
                 }
                 if (bigOven.done)
                 {
-<<<<<<< HEAD
                     gameManager.bigCookies += 1;
                     bigOven.resetVars();
-=======
-                    gameManager.bigCookies += 3;
-                    //if it's done, restock;
->>>>>>> f4ad2b039b7ea3a407ffe408abb8b43312e7b000
                 }
                 if (bigOven.burned)
                 {
