@@ -1387,6 +1387,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7215579445149383247, guid: b68d3ce14ad4a5844aa060e46bebf1d7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7215579445149383247, guid: b68d3ce14ad4a5844aa060e46bebf1d7,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7215579445149383247, guid: b68d3ce14ad4a5844aa060e46bebf1d7,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7215579445149383247, guid: b68d3ce14ad4a5844aa060e46bebf1d7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b68d3ce14ad4a5844aa060e46bebf1d7, type: 3}
 --- !u!224 &1395610545 stripped
@@ -1855,11 +1875,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3693104267797009092, guid: b68d3ce14ad4a5844aa060e46bebf1d7,
-        type: 3}
-      propertyPath: m_Value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3693104267797009093, guid: b68d3ce14ad4a5844aa060e46bebf1d7,
         type: 3}
       propertyPath: linkedOven
@@ -1868,6 +1883,31 @@ PrefabInstance:
     - target: {fileID: 3693104267842789891, guid: b68d3ce14ad4a5844aa060e46bebf1d7,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693104267797009092, guid: b68d3ce14ad4a5844aa060e46bebf1d7,
+        type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7215579445149383247, guid: b68d3ce14ad4a5844aa060e46bebf1d7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7215579445149383247, guid: b68d3ce14ad4a5844aa060e46bebf1d7,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7215579445149383247, guid: b68d3ce14ad4a5844aa060e46bebf1d7,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7215579445149383247, guid: b68d3ce14ad4a5844aa060e46bebf1d7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2078,6 +2118,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallOven
       objectReference: {fileID: 0}
+    - target: {fileID: 293696321523666070, guid: 3a6848b255d785c43b55337950808285,
+        type: 3}
+      propertyPath: bakeSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4997213096807057945, guid: 3a6848b255d785c43b55337950808285,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2162,11 +2207,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 293696321523666070, guid: 3a6848b255d785c43b55337950808285,
-        type: 3}
-      propertyPath: bakeSpeed
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a6848b255d785c43b55337950808285, type: 3}
@@ -2337,6 +2377,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BigOven
       objectReference: {fileID: 0}
+    - target: {fileID: 293696321523666070, guid: 3a6848b255d785c43b55337950808285,
+        type: 3}
+      propertyPath: bakeSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4997213096807057945, guid: 3a6848b255d785c43b55337950808285,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2391,11 +2436,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 293696321523666070, guid: 3a6848b255d785c43b55337950808285,
-        type: 3}
-      propertyPath: bakeSpeed
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a6848b255d785c43b55337950808285, type: 3}
