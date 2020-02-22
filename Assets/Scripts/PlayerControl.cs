@@ -9,25 +9,19 @@ public class PlayerControl : MonoBehaviour
     private Vector2 speed;
     public GameManager gameManager;
     // private Animator anim;
-    public Rigidbody2D Bigbox;
-    public Rigidbody2D Smallbox;
-    Vector2 CookieSpeed;
-
-    private float BigCook;
-    private float SmallCook;
-    private float BigTimer;
-    private float SmallTimer;
-    private bool BigStart;
-    private bool SmallStart;
-    private int pos;
+    public GameObject bigBox;
+    public GameObject smallBox;
+    public float cookieSpeed;
 
     public OvenScript bigOven;
     public OvenScript smallOven;
 
-    public Vector3[] locations = new Vector3[5];
-    private Vector3 temp = new Vector3();
+    public Vector3[] rowLocs = new Vector3[3];
+    public Vector3[] ovenLocs = new Vector3[3];
     private Vector3 scale = new Vector3();
 
+    private bool inRows = true;
+    private int pos;
     // Use this for initialization
     void Start()
     {
@@ -38,21 +32,18 @@ public class PlayerControl : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         //anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        BigCook = 0;
-        SmallCook = 0;
-        BigTimer = 0;
-        SmallTimer = 0;
-        BigStart = false;
-        CookieSpeed = new Vector2(-50.0f, 0.0f);
-        pos = 3;
+        pos = 1;
 
-        locations[1].Set(50.94f, -0.18f, 0f);//small oven
-        locations[3].Set(52.15f, -6.36f, 0f);//big oven
-        locations[0].Set(42.01f, 2.09f, 0f);//row 1
-        locations[2].Set(42.01f, -2.13f, 0f);//row 2
-        locations[4].Set(42.01f, -8.84f, 0f);//row 3
+        rowLocs[0].Set(5f, 6f, 0f);// row 1
+        rowLocs[1].Set(5f, 1f, 0f);// row 2
+        rowLocs[2].Set(5f, -6f, 0f);// row 3
 
-        this.transform.position = locations[3];
+        ovenLocs[0].Set(14f, 3f, 0f);// small oven
+        ovenLocs[1].Set(15f, -2f, 0f);// between them
+        ovenLocs[2].Set(16f, -6f, 0f);// big oven
+
+        this.transform.position = rowLocs[pos];
+
     }
 
 
@@ -62,64 +53,76 @@ public class PlayerControl : MonoBehaviour
     {
         movePlayer();
         interactPlayer();
-        SmallCook = gameManager.smallCookies;
-        BigCook = gameManager.bigCookies;
     }
 
     private void movePlayer()
     {
         //this function gets input either from wasd or the arrow keys. all the if statements do the same thing except change where the player moves and the size it is
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-        { 
-            pos -= 2;
-
+        {
+            if (inRows)
+            {
+                if(pos > 0)
+                {
+                    --pos;
+                    rb2D.position = rowLocs[pos];
+                    scale.Set(this.transform.localScale.x - .25f, this.transform.localScale.y - .25f, 1);
+                    this.transform.localScale = scale;
+                }
+            }
+            else
+            {
+                if (pos > 0)
+                {
+                    --pos;
+                    rb2D.position = ovenLocs[pos];
+                    scale.Set(this.transform.localScale.x - .25f, this.transform.localScale.y - .25f, 1);
+                    this.transform.localScale = scale;
+                }
+            }
         }
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            pos += 2;
+            if (inRows)
+            {
+                if (pos < 2)
+                {
+                    ++pos;
+                    rb2D.position = rowLocs[pos];
+                    scale.Set(this.transform.localScale.x + .25f, this.transform.localScale.y + .25f, 1);
+                    this.transform.localScale = scale;
+                }
+            }
+            else
+            {
+                if (pos < 2)
+                {
+                    ++pos;
+                    rb2D.position = ovenLocs[pos];
+                    scale.Set(this.transform.localScale.x + .25f, this.transform.localScale.y + .25f, 1);
+                    this.transform.localScale = scale;
+                }
+            }
         }
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            pos -= 1;
-            if (pos == -1)
+            if (!inRows)
             {
-                pos = 4;
+                rb2D.position = rowLocs[pos];
+                sprite.flipX = false;
+                inRows = true;
             }
+
         }
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            pos += 1;
-            if (pos == 5)
+            if (inRows)
             {
-                pos = 0;
+                rb2D.position = ovenLocs[pos];
+                sprite.flipX = true;
+                inRows = false;
+                
             }
-        }
-        if(pos == 5)
-        {
-            pos = 1;
-        }
-        if(pos ==6)
-        {
-            pos = 0;
-        }
-        if (pos == -1)
-        {
-            pos = 3;
-        }
-        if (pos == -2)
-        {
-            pos = 4;
-        }
-
-        rb2D.position = locations[pos];
-
-        if (pos == 1 || pos == 3)
-        {
-            sprite.flipX = true;
-        }
-        if (pos == 0 || pos == 2 || pos == 4)
-        {
-            sprite.flipX = false;
         }
     }
 
@@ -129,7 +132,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //if the player is in front of the small oven they can interact with it
-            if (this.transform.position == locations[1])
+            if (this.transform.position == ovenLocs[0])
             {
                 if (!smallOven.baking)
                 {
@@ -147,7 +150,7 @@ public class PlayerControl : MonoBehaviour
                 }
             }
 
-            else if (this.transform.position == locations[3])
+            else if (this.transform.position == ovenLocs[2])
             {
                 if (!bigOven.baking)
                 {
@@ -168,33 +171,32 @@ public class PlayerControl : MonoBehaviour
             }
 
         }
-        if (this.transform.position == locations[2] || this.transform.position == locations[0] || this.transform.position == locations[4])
+        if (inRows)
          {
 
             if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.C))
             {
-                print("E has been pressed" + SmallCook);
-                if (SmallCook > 0)
+                if (gameManager.smallCookies > 0)
                 {
-                    print("throwing small cookie" + SmallCook);
-                    Rigidbody2D clone;
-                    clone = Instantiate(Smallbox, transform.position, transform.rotation);
-                    clone.AddForce(CookieSpeed);
-                    SmallCook--;
-
+                    GameObject clone = new GameObject();
+                    clone = Instantiate(smallBox, this.transform.position, this.transform.rotation);
+                    clone.transform.localScale = this.transform.localScale;
+                    Rigidbody2D cloneRB = clone.GetComponent<Rigidbody2D>();
+                    cloneRB.velocity = new Vector2(cookieSpeed, 0f);
+                    --gameManager.smallCookies;
                 }
             }
             //if Q is pressed, player throws a big cookie and reduces big cookie count
             if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.V))
             {
-                print("Q has been pressed" + BigCook);
-                if (BigCook > 0)
+                if (gameManager.bigCookies > 0)
                 {
-                    print("throwing big cookie" + BigCook);
-                    Rigidbody2D clone2;
-                    clone2 = Instantiate(Bigbox, transform.position, transform.rotation);
-                    clone2.AddForce(CookieSpeed);
-                    BigCook--;
+                    GameObject clone = new GameObject();
+                    clone = Instantiate(bigBox, this.transform.position, this.transform.rotation);
+                    clone.transform.localScale = this.transform.localScale;
+                    Rigidbody2D cloneRB = clone.GetComponent<Rigidbody2D>();
+                    cloneRB.velocity = new Vector2(cookieSpeed, 0f);
+                    --gameManager.bigCookies;
                 }
             }
          }

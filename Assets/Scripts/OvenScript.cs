@@ -4,7 +4,6 @@ public class OvenScript : MonoBehaviour
 {
     public float bakeSpeed = 0;
     public float timeLeft = 0;
-    public GameObject cookieType;
     public int numCookies = 0;
     public bool baking = false;
     public bool done = false;
@@ -26,8 +25,6 @@ public class OvenScript : MonoBehaviour
         if (baking)
         {
             linkedHandle.SetActive(true);
-            print("timeleft= "+ timeLeft + " done=" + done + " baking=" + baking + " burned=" + burned);
-
             timeLeft -= Time.deltaTime;
 
             if (timeLeft <= 0 )

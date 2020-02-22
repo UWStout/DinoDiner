@@ -48,8 +48,8 @@ public class GameManager : MonoBehaviour
     public void setText()
     {
         scorecountText.text = "Score: " + score.ToString();
-        sCookieCountText.text = "Small Cookies: " + smallCookies.ToString();
-        bCookieCountText.text = "Big Cookies: " + bigCookies.ToString();
+        sCookieCountText.text = smallCookies.ToString();
+        bCookieCountText.text = bigCookies.ToString();
 
     }
 }
