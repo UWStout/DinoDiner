@@ -31,7 +31,7 @@ public class CookieScript : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
             gameManager.score++;
-            gameManager.setScoreCountText();
+            gameManager.setText();
             
         }
     }

@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public int score = 0;
     public Text scorecountText;
+    public Text sCookieCountText;
+    public Text bCookieCountText;
     public int smallCookies = 0;
     public int bigCookies = 0;
 
@@ -34,8 +36,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scorecountText = GameObject.Find("ScoreCountText").GetComponent<Text>();
-        setScoreCountText();
+        setText();
     }
 
     // Update is called once per frame
@@ -44,8 +45,11 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void setScoreCountText()
+    public void setText()
     {
         scorecountText.text = "Score: " + score.ToString();
+        sCookieCountText.text = "Small Cookies: " + smallCookies.ToString();
+        bCookieCountText.text = "Big Cookies: " + bigCookies.ToString();
+
     }
 }

@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
     private float SmallTimer;
     private bool BigStart;
     private bool SmallStart;
+    private int pos;
 
     public OvenScript bigOven;
     public OvenScript smallOven;
@@ -43,12 +44,13 @@ public class PlayerControl : MonoBehaviour
         SmallTimer = 0;
         BigStart = false;
         CookieSpeed = new Vector2(-50.0f, 0.0f);
+        pos = 3;
 
-        locations[0].Set(6f, 3f, 0f);
-        locations[1].Set(6f, -3f, 0f);
-        locations[2].Set(2f, 3f, 0f);
-        locations[3].Set(2f, 0f, 0f);
-        locations[4].Set(2f, -3f, 0f);
+        locations[1].Set(50.94f, -0.18f, 0f);//small oven
+        locations[3].Set(52.15f, -6.36f, 0f);//big oven
+        locations[0].Set(42.01f, 2.09f, 0f);//row 1
+        locations[2].Set(42.01f, -2.13f, 0f);//row 2
+        locations[4].Set(42.01f, -8.84f, 0f);//row 3
 
         this.transform.position = locations[3];
     }
@@ -60,57 +62,65 @@ public class PlayerControl : MonoBehaviour
     {
         movePlayer();
         interactPlayer();
+        SmallCook = gameManager.smallCookies;
+        BigCook = gameManager.bigCookies;
     }
 
-    /* Movement function, feels somewhat floaty because Input.GetAxis is a float between -1 and 1, so he has to speed up.
-     * Doing (int)Input.GetAxis("Horizontal") would cast it to an int, but then there's a delay between all movements while the float gets high enough to be cast to 1
-     *  Maybe doing a big if(Input.GetKey(KeyCode.(all the movement keys)) with setting the velocity in every if block would be less floaty, but that would slow things down as it would have to check all 8 keys every frame?
-     */
     private void movePlayer()
     {
         //this function gets input either from wasd or the arrow keys. all the if statements do the same thing except change where the player moves and the size it is
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (this.transform.position.y <= 0)
-            {
-                //these two lines are to change the position of the player character 
-                temp.Set(this.transform.position.x, this.transform.position.y + 3, 0);
-                this.transform.position = temp;
-                //this changes the size of the player model to give the play area depth
-                scale.Set(this.transform.localScale.x - .15f, this.transform.localScale.y - .15f, this.transform.localScale.z - .15f);
-                this.transform.localScale = scale;
-            }
+        { 
+            pos -= 2;
+
         }
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (this.transform.position.y >= 0)
-            {
-                temp.Set(this.transform.position.x, this.transform.position.y - 3, 0);
-                this.transform.position = temp;
-                scale.Set(this.transform.localScale.x + .15f, this.transform.localScale.y + .15f, this.transform.localScale.z + .15f);
-                this.transform.localScale = scale;
-            }
+            pos += 2;
         }
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (this.transform.position.x >= 4)
+            pos -= 1;
+            if (pos == -1)
             {
-                temp.Set(this.transform.position.x - 2, this.transform.position.y, 0);
-                this.transform.position = temp;
-                sprite.flipX = false;
+                pos = 4;
             }
         }
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (this.transform.position.x <= 4)
+            pos += 1;
+            if (pos == 5)
             {
-                temp.Set(this.transform.position.x + 2, this.transform.position.y, 0);
-                this.transform.position = temp;
-                sprite.flipX = true;
+                pos = 0;
             }
         }
+        if(pos == 5)
+        {
+            pos = 1;
+        }
+        if(pos ==6)
+        {
+            pos = 0;
+        }
+        if (pos == -1)
+        {
+            pos = 3;
+        }
+        if (pos == -2)
+        {
+            pos = 4;
+        }
 
+        rb2D.position = locations[pos];
 
+        if (pos == 1 || pos == 3)
+        {
+            sprite.flipX = true;
+        }
+        if (pos == 0 || pos == 2 || pos == 4)
+        {
+            sprite.flipX = false;
+        }
     }
 
     private void interactPlayer()
@@ -119,7 +129,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //if the player is in front of the small oven they can interact with it
-            if (this.transform.position == locations[0])
+            if (this.transform.position == locations[1])
             {
                 if (!smallOven.baking)
                 {
@@ -128,6 +138,7 @@ public class PlayerControl : MonoBehaviour
                 if (smallOven.done)
                 {
                     gameManager.smallCookies += 3;
+                    gameManager.setText();
                     smallOven.resetVars();
                 }
                 if (smallOven.burned)
@@ -136,7 +147,7 @@ public class PlayerControl : MonoBehaviour
                 }
             }
 
-            else if (this.transform.position == locations[1])
+            else if (this.transform.position == locations[3])
             {
                 if (!bigOven.baking)
                 {
@@ -146,11 +157,8 @@ public class PlayerControl : MonoBehaviour
                 {
 
                     gameManager.bigCookies += 1;
+                    gameManager.setText();
                     bigOven.resetVars();
-
-                    gameManager.bigCookies += 3;
-                    //if it's done, restock;
-
                 }
                 if (bigOven.burned)
                 {
@@ -159,13 +167,8 @@ public class PlayerControl : MonoBehaviour
 
             }
 
-            
-
-           
-
-
         }
-        if (this.transform.position == locations[2] || this.transform.position == locations[3] || this.transform.position == locations[4])
+        if (this.transform.position == locations[2] || this.transform.position == locations[0] || this.transform.position == locations[4])
          {
 
             if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.C))
@@ -196,7 +199,4 @@ public class PlayerControl : MonoBehaviour
             }
          }
     }
-
-
-
 }
