@@ -25,16 +25,18 @@ public class OvenScript : MonoBehaviour
     {
         if (baking)
         {
+            //activates baking and counts down the time, and if time runs out a second time the cookies become burnt.
             linkedHandle.SetActive(true);
             print("timeleft= "+ timeLeft + " done=" + done + " baking=" + baking + " burned=" + burned);
-
+            //counts down the time
             timeLeft -= Time.deltaTime;
-
+            //this if statement is what determines the first countdown for the cookies to be cooked.
             if (timeLeft <= 0 )
             {
                 done = true;
                 burning = true;
             }
+            //this statement determines if the cookies become burnt
             if (timeLeft < -bakeSpeed)
             {
                 done = false;
@@ -45,12 +47,14 @@ public class OvenScript : MonoBehaviour
 
     public void bakeCommand()
     {
+        //this can be called elsewhere to start the baking.
         timeLeft = bakeSpeed;
         baking = true;
     }
 
     public void resetVars()
     {
+        //resets the variables so that the baking can be done again
         baking = false;
         done = false;
         burning = false;

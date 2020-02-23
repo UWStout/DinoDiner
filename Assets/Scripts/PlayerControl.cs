@@ -13,8 +13,6 @@ public class PlayerControl : MonoBehaviour
     public Rigidbody2D Smallbox;
     Vector2 CookieSpeed;
 
-    private float BigCook;
-    private float SmallCook;
     private float BigTimer;
     private float SmallTimer;
     private bool BigStart;
@@ -38,8 +36,6 @@ public class PlayerControl : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         //anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        BigCook = 0;
-        SmallCook = 0;
         BigTimer = 0;
         SmallTimer = 0;
         BigStart = false;
@@ -62,13 +58,11 @@ public class PlayerControl : MonoBehaviour
     {
         movePlayer();
         interactPlayer();
-        SmallCook = gameManager.smallCookies;
-        BigCook = gameManager.bigCookies;
     }
 
     private void movePlayer()
     {
-        //this function gets input either from wasd or the arrow keys. all the if statements do the same thing except change where the player moves and the size it is
+        //this function gets input either from wasd or the arrow keys. Up and down increase/decrease by 2; left and right increase/decrease by 1
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         { 
             pos -= 2;
@@ -94,6 +88,7 @@ public class PlayerControl : MonoBehaviour
                 pos = 0;
             }
         }
+        //these if statements handle the looping if the player hits the bottom of the screen
         if(pos == 5)
         {
             pos = 1;
@@ -110,9 +105,9 @@ public class PlayerControl : MonoBehaviour
         {
             pos = 4;
         }
-
+        //moves the player to a new location
         rb2D.position = locations[pos];
-
+        //these flip the player model if they are on the left or right side
         if (pos == 1 || pos == 3)
         {
             sprite.flipX = true;
@@ -133,16 +128,19 @@ public class PlayerControl : MonoBehaviour
             {
                 if (!smallOven.baking)
                 {
+                    //starts the baking
                     smallOven.bakeCommand();
                 }
                 if (smallOven.done)
                 {
+                    //when the baking is done collect the cookies and reset variables.
                     gameManager.smallCookies += 3;
                     gameManager.setText();
                     smallOven.resetVars();
                 }
                 if (smallOven.burned)
                 {
+                    //if the cookies are burned, reset the variables and don't give player any cookies.
                     smallOven.resetVars();
                 }
             }
@@ -150,51 +148,52 @@ public class PlayerControl : MonoBehaviour
             else if (this.transform.position == locations[3])
             {
                 if (!bigOven.baking)
-                {
+                {//starts baking
                     bigOven.bakeCommand();
                 }
                 if (bigOven.done)
                 {
-
-                    gameManager.bigCookies += 1;
+                    //collects big cookies and resets variables
+                    gameManager.bigCookies += 4;
                     gameManager.setText();
                     bigOven.resetVars();
                 }
                 if (bigOven.burned)
                 {
+                    //if cookies are burned then reset variables and don't give player cookies.
                     bigOven.resetVars();
                 }
 
             }
 
         }
+
         if (this.transform.position == locations[2] || this.transform.position == locations[0] || this.transform.position == locations[4])
          {
-
-            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.C))
+            //this throws the small cookie when E or V are pressed
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.V))
             {
-                print("E has been pressed" + SmallCook);
-                if (SmallCook > 0)
+                if (gameManager.smallCookies > 0)
                 {
-                    print("throwing small cookie" + SmallCook);
                     Rigidbody2D clone;
+                    //clones a small cookie box, and sends it to the left at a certain speed
                     clone = Instantiate(Smallbox, transform.position, transform.rotation);
                     clone.AddForce(CookieSpeed);
-                    SmallCook--;
+                    gameManager.smallCookies--;
 
                 }
             }
             //if Q is pressed, player throws a big cookie and reduces big cookie count
-            if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.V))
+            if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.C))
             {
-                print("Q has been pressed" + BigCook);
-                if (BigCook > 0)
+                if (gameManager.bigCookies > 0)
                 {
-                    print("throwing big cookie" + BigCook);
+                    //clones a big cookie box then sends it to the left.
+     
                     Rigidbody2D clone2;
                     clone2 = Instantiate(Bigbox, transform.position, transform.rotation);
                     clone2.AddForce(CookieSpeed);
-                    BigCook--;
+                    gameManager.bigCookies--;
                 }
             }
          }
