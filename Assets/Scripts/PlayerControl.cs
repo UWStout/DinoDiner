@@ -9,17 +9,14 @@ public class PlayerControl : MonoBehaviour
     private Vector2 speed;
     public GameManager gameManager;
     // private Animator anim;
-<<<<<<< HEAD
     public GameObject bigBox;
     public GameObject smallBox;
-=======
     public Rigidbody2D Bigbox;
     public Rigidbody2D Smallbox;
     Vector2 CookieSpeed;
 
 
     private int pos;
->>>>>>> 15fb2448c791560c4788b3257168bd7cf8257a37
 
     public OvenScript bigOven;
     public OvenScript smallOven;
@@ -31,7 +28,7 @@ public class PlayerControl : MonoBehaviour
     private Vector3 cookiePos = new Vector3();
 
     private bool inRows = true;
-    private int pos;
+
     // Use this for initialization
     void Start()
     {
@@ -42,7 +39,6 @@ public class PlayerControl : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         //anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-<<<<<<< HEAD
         pos = 1;
 
         rowLocs[0].Set(5f, 6f, 0f);// row 1
@@ -57,21 +53,10 @@ public class PlayerControl : MonoBehaviour
 
 
 
-=======
         CookieSpeed = new Vector2(-50.0f, 0.0f);
         pos = 3;
 
-        locations[1].Set(50.94f, -0.18f, 0f);//small oven
-        locations[3].Set(52.15f, -6.36f, 0f);//big oven
-        locations[0].Set(42.01f, 2.09f, 0f);//row 1
-        locations[2].Set(42.01f, -2.13f, 0f);//row 2
-        locations[4].Set(42.01f, -8.84f, 0f);//row 3
 
-        this.transform.position = locations[3];
-
-        gameManager.bigCookies = 10;
-        gameManager.smallCookies = 10;
->>>>>>> 15fb2448c791560c4788b3257168bd7cf8257a37
     }
 
 
@@ -152,8 +137,6 @@ public class PlayerControl : MonoBehaviour
                 
             }
         }
-<<<<<<< HEAD
-=======
         //these if statements handle the looping if the player hits the bottom of the screen
         if(pos == 5)
         {
@@ -172,7 +155,7 @@ public class PlayerControl : MonoBehaviour
             pos = 4;
         }
         //moves the player to a new location
-        rb2D.position = locations[pos];
+        rb2D.position = rowLocs[pos];
         //these flip the player model if they are on the left or right side
         if (pos == 1 || pos == 3)
         {
@@ -182,7 +165,6 @@ public class PlayerControl : MonoBehaviour
         {
             sprite.flipX = false;
         }
->>>>>>> 15fb2448c791560c4788b3257168bd7cf8257a37
     }
 
     private void interactPlayer()
@@ -234,32 +216,26 @@ public class PlayerControl : MonoBehaviour
             }
 
         }
-<<<<<<< HEAD
         if (inRows)
-=======
 
-        if (this.transform.position == locations[2] || this.transform.position == locations[0] || this.transform.position == locations[4])
->>>>>>> 15fb2448c791560c4788b3257168bd7cf8257a37
+        if (this.transform.position == rowLocs[2] || this.transform.position == rowLocs[0] || this.transform.position == rowLocs[4])
          {
             //this throws the small cookie when E or V are pressed
             if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.V))
             {
                 if (gameManager.smallCookies > 0)
                 {
-<<<<<<< HEAD
                     GameObject clone = new GameObject();
                     clone = Instantiate(smallBox, this.transform.position, this.transform.rotation);
                     cookieScale.Set(this.transform.localScale.x - .5f, this.transform.localScale.y - .5f, 1);
                     clone.transform.localScale = cookieScale;
                     --gameManager.smallCookies;
-=======
-                    Rigidbody2D clone;
+                    Rigidbody2D cloned;
                     //clones a small cookie box, and sends it to the left at a certain speed
-                    clone = Instantiate(Smallbox, transform.position, transform.rotation);
-                    clone.AddForce(CookieSpeed);
+                    cloned = Instantiate(Smallbox, transform.position, transform.rotation);
+                    cloned.AddForce(CookieSpeed);
                     gameManager.smallCookies--;
 
->>>>>>> 15fb2448c791560c4788b3257168bd7cf8257a37
                 }
             }
             //if Q is pressed, player throws a big cookie and reduces big cookie count
@@ -267,19 +243,16 @@ public class PlayerControl : MonoBehaviour
             {
                 if (gameManager.bigCookies > 0)
                 {
-<<<<<<< HEAD
                     GameObject clone = Instantiate(bigBox, this.transform.position, this.transform.rotation);
                     cookieScale.Set(this.transform.localScale.x - .5f, this.transform.localScale.y - .5f, 1);
                     clone.transform.localScale = cookieScale;
                     --gameManager.bigCookies;
-=======
                     //clones a big cookie box then sends it to the left.
      
                     Rigidbody2D clone2;
                     clone2 = Instantiate(Bigbox, transform.position, transform.rotation);
                     clone2.AddForce(CookieSpeed);
                     gameManager.bigCookies--;
->>>>>>> 15fb2448c791560c4788b3257168bd7cf8257a37
                 }
             }
          }
