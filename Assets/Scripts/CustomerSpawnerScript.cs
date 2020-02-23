@@ -5,7 +5,9 @@ public class CustomerSpawnerScript : MonoBehaviour
 {
     public GameObject[] pool;
     public float scale;
-    int wait_time;
+    public int wait_time;
+    public int renderOrder = 0;
+
 
 
     // Start is called before the first frame update
@@ -28,9 +30,12 @@ public class CustomerSpawnerScript : MonoBehaviour
         {
             wait_time = Random.Range(0, 20);
             yield return new WaitForSeconds(wait_time);
-            GameObject clone = new GameObject();
-            clone = Instantiate(pool[Random.Range(0, 3)], this.transform.position, this.transform.rotation);
+            GameObject clone = Instantiate(pool[Random.Range(0, 3)], this.transform.position, this.transform.rotation);
             clone.transform.localScale = new Vector3(scale, scale, 1);
+            SpriteRenderer sClone = clone.GetComponent<SpriteRenderer>();
+            sClone.sortingOrder = renderOrder;
+
+
         }
     }
 }

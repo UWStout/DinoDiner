@@ -11,7 +11,6 @@ public class PlayerControl : MonoBehaviour
     // private Animator anim;
     public GameObject bigBox;
     public GameObject smallBox;
-    public float cookieSpeed;
 
     public OvenScript bigOven;
     public OvenScript smallOven;
@@ -19,6 +18,8 @@ public class PlayerControl : MonoBehaviour
     public Vector3[] rowLocs = new Vector3[3];
     public Vector3[] ovenLocs = new Vector3[3];
     private Vector3 scale = new Vector3();
+    private Vector3 cookieScale = new Vector3();
+    private Vector3 cookiePos = new Vector3();
 
     private bool inRows = true;
     private int pos;
@@ -43,6 +44,8 @@ public class PlayerControl : MonoBehaviour
         ovenLocs[2].Set(16f, -6f, 0f);// big oven
 
         this.transform.position = rowLocs[pos];
+
+
 
     }
 
@@ -180,9 +183,8 @@ public class PlayerControl : MonoBehaviour
                 {
                     GameObject clone = new GameObject();
                     clone = Instantiate(smallBox, this.transform.position, this.transform.rotation);
-                    clone.transform.localScale = this.transform.localScale;
-                    Rigidbody2D cloneRB = clone.GetComponent<Rigidbody2D>();
-                    cloneRB.velocity = new Vector2(cookieSpeed, 0f);
+                    cookieScale.Set(this.transform.localScale.x - .5f, this.transform.localScale.y - .5f, 1);
+                    clone.transform.localScale = cookieScale;
                     --gameManager.smallCookies;
                 }
             }
@@ -191,11 +193,9 @@ public class PlayerControl : MonoBehaviour
             {
                 if (gameManager.bigCookies > 0)
                 {
-                    GameObject clone = new GameObject();
-                    clone = Instantiate(bigBox, this.transform.position, this.transform.rotation);
-                    clone.transform.localScale = this.transform.localScale;
-                    Rigidbody2D cloneRB = clone.GetComponent<Rigidbody2D>();
-                    cloneRB.velocity = new Vector2(cookieSpeed, 0f);
+                    GameObject clone = Instantiate(bigBox, this.transform.position, this.transform.rotation);
+                    cookieScale.Set(this.transform.localScale.x - .5f, this.transform.localScale.y - .5f, 1);
+                    clone.transform.localScale = cookieScale;
                     --gameManager.bigCookies;
                 }
             }

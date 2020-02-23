@@ -10,6 +10,7 @@ public class OvenScript : MonoBehaviour
     public bool burning = false;
     public bool burned = false;
     public GameObject linkedHandle;
+    public Animator linkedTooter;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class OvenScript : MonoBehaviour
     {
         if (baking)
         {
+            linkedTooter.SetBool("linkedIsCooking", true);
             linkedHandle.SetActive(true);
             timeLeft -= Time.deltaTime;
 
@@ -34,9 +36,14 @@ public class OvenScript : MonoBehaviour
             }
             if (timeLeft < -bakeSpeed)
             {
+                linkedTooter.SetBool("linkedIsCooking", false);
                 done = false;
                 burned = true;
             }
+        }
+        else
+        {
+            linkedTooter.SetBool("linkedIsCooking", false);
         }
     }
 
