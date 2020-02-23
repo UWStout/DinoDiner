@@ -23,6 +23,21 @@ public class CustomerMovementScript: MonoBehaviour
         this.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
     }
 
+    private void OnCollisionEnter2D(Collision2D collide)
+    {
+        if (collide.gameObject.tag == "SmallCookie")
+        {
+            this.transform.position = new Vector3(this.transform.position.x - 2, this.transform.position.y, this.transform.position.z);
+            Destroy(collide.gameObject);
+        }
+        if (collide.gameObject.tag == "BigCookie")
+        {
+            Destroy(collide.gameObject);
+            Destroy(this.gameObject);
+        }
+    }
+
+
 
 
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Text bCookieCountText;
     public int smallCookies = 0;
     public int bigCookies = 0;
+    
 
     //awake is called before start
     private void Awake()
@@ -47,9 +49,17 @@ public class GameManager : MonoBehaviour
 
     public void setText()
     {
+        //sets the scores and cookies into the game space
         scorecountText.text = "Score: " + score.ToString();
         sCookieCountText.text = "Small Cookies: " + smallCookies.ToString();
         bCookieCountText.text = "Big Cookies: " + bigCookies.ToString();
 
+    }
+    public void GameOver()
+    {
+        GameObject.Find("GameOver").SetActive(true);
+        Time.timeScale = 0;
+
+        SceneManager.LoadScene("Diner");
     }
 }
