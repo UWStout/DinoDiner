@@ -4,13 +4,13 @@ public class OvenScript : MonoBehaviour
 {
     public float bakeSpeed = 0;
     public float timeLeft = 0;
-    public GameObject cookieType;
     public int numCookies = 0;
     public bool baking = false;
     public bool done = false;
     public bool burning = false;
     public bool burned = false;
     public GameObject linkedHandle;
+    public Animator linkedTooter;
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +25,15 @@ public class OvenScript : MonoBehaviour
     {
         if (baking)
         {
+<<<<<<< HEAD
+            linkedTooter.SetBool("linkedIsCooking", true);
+            linkedHandle.SetActive(true);
+=======
             //activates baking and counts down the time, and if time runs out a second time the cookies become burnt.
             linkedHandle.SetActive(true);
             print("timeleft= "+ timeLeft + " done=" + done + " baking=" + baking + " burned=" + burned);
             //counts down the time
+>>>>>>> 15fb2448c791560c4788b3257168bd7cf8257a37
             timeLeft -= Time.deltaTime;
             //this if statement is what determines the first countdown for the cookies to be cooked.
             if (timeLeft <= 0 )
@@ -39,9 +44,14 @@ public class OvenScript : MonoBehaviour
             //this statement determines if the cookies become burnt
             if (timeLeft < -bakeSpeed)
             {
+                linkedTooter.SetBool("linkedIsCooking", false);
                 done = false;
                 burned = true;
             }
+        }
+        else
+        {
+            linkedTooter.SetBool("linkedIsCooking", false);
         }
     }
 

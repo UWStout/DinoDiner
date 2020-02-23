@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3407130987581536061}
   - component: {fileID: 3407130987581536060}
   - component: {fileID: 18967129035660497}
+  - component: {fileID: 6791889397363553354}
   m_Layer: 0
   m_Name: BigBox
   m_TagString: Untagged
@@ -102,3 +103,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6791889397363553354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3407130987581536035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec063dd460ae47944a36e95e44f119c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  speed: 5
+  rb2d: {fileID: 18967129035660497}

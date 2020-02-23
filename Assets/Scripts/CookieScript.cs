@@ -5,8 +5,9 @@ using UnityEngine;
 public class CookieScript : MonoBehaviour
 {
     public GameManager gameManager;
-    public int speed = 5;
+    public int speed;
     public Rigidbody2D rb2d;
+    public bool isSmall;
 
 
     // Start is called before the first frame update
@@ -28,12 +29,18 @@ public class CookieScript : MonoBehaviour
         
         if (collision.gameObject.tag == "Customer")
         {
-            collision.gameObject.SetActive(false);
             Destroy(collision.gameObject);
-            Destroy(this.gameObject);
+            if (isSmall)
+            {
+                Destroy(this.gameObject);
+            }
             gameManager.score++;
             gameManager.setText();
             
+        }
+        if (collision.gameObject.tag == "CookieStopper")
+        {
+            Destroy(this.gameObject);
         }
     }
 }
