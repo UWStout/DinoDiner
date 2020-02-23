@@ -25,15 +25,9 @@ public class OvenScript : MonoBehaviour
     {
         if (baking)
         {
-<<<<<<< HEAD
             linkedTooter.SetBool("linkedIsCooking", true);
             linkedHandle.SetActive(true);
-=======
-            //activates baking and counts down the time, and if time runs out a second time the cookies become burnt.
-            linkedHandle.SetActive(true);
-            print("timeleft= "+ timeLeft + " done=" + done + " baking=" + baking + " burned=" + burned);
-            //counts down the time
->>>>>>> 15fb2448c791560c4788b3257168bd7cf8257a37
+
             timeLeft -= Time.deltaTime;
             //this if statement is what determines the first countdown for the cookies to be cooked.
             if (timeLeft <= 0 )
