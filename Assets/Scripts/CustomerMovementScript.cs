@@ -25,6 +25,7 @@ public class CustomerMovementScript: MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collide)
     {
+        //if hit with a small cookie move back two spots, if hit with big cookie get yeeted
         if (collide.gameObject.tag == "SmallCookie")
         {
             this.transform.position = new Vector3(this.transform.position.x - 2, this.transform.position.y, this.transform.position.z);
