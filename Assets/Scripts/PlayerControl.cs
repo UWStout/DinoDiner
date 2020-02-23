@@ -13,10 +13,7 @@ public class PlayerControl : MonoBehaviour
     public Rigidbody2D Smallbox;
     Vector2 CookieSpeed;
 
-    private float BigTimer;
-    private float SmallTimer;
-    private bool BigStart;
-    private bool SmallStart;
+
     private int pos;
 
     public OvenScript bigOven;
@@ -36,9 +33,6 @@ public class PlayerControl : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         //anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        BigTimer = 0;
-        SmallTimer = 0;
-        BigStart = false;
         CookieSpeed = new Vector2(-50.0f, 0.0f);
         pos = 3;
 
@@ -49,6 +43,9 @@ public class PlayerControl : MonoBehaviour
         locations[4].Set(42.01f, -8.84f, 0f);//row 3
 
         this.transform.position = locations[3];
+
+        gameManager.bigCookies = 10;
+        gameManager.smallCookies = 10;
     }
 
 

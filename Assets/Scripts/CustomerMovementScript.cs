@@ -23,7 +23,7 @@ public class CustomerMovementScript: MonoBehaviour
         this.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
     }
 
-    private void OnCollisionEnter2D(Collision2D collide)
+    private void OnTriggerEnter2D(Collision2D collide)
     {
         //if hit with a small cookie move back two spots, if hit with big cookie get yeeted
         if (collide.gameObject.tag == "SmallCookie")
