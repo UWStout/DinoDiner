@@ -22,8 +22,7 @@ public class Losing : MonoBehaviour
 
         if (collision.gameObject.tag == "Customer")
         {
-
-            print("its colliding");
+           
             gameManager.GameOver();
 
         }
