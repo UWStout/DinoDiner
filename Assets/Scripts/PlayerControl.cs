@@ -11,10 +11,6 @@ public class PlayerControl : MonoBehaviour
     // private Animator anim;
     public GameObject bigBox;
     public GameObject smallBox;
-    public Rigidbody2D Bigbox;
-    public Rigidbody2D Smallbox;
-    Vector2 CookieSpeed;
-
 
     private int pos;
 
@@ -50,13 +46,6 @@ public class PlayerControl : MonoBehaviour
         ovenLocs[2].Set(16f, -6f, 0f);// big oven
 
         this.transform.position = rowLocs[pos];
-
-
-
-        CookieSpeed = new Vector2(-50.0f, 0.0f);
-        pos = 3;
-
-
     }
 
 
@@ -189,25 +178,16 @@ public class PlayerControl : MonoBehaviour
 
         }
         if (inRows)
-
-        if (this.transform.position == rowLocs[2] || this.transform.position == rowLocs[0] || this.transform.position == rowLocs[4])
          {
             //this throws the small cookie when E or V are pressed
             if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.V))
             {
                 if (gameManager.smallCookies > 0)
                 {
-                    GameObject clone = new GameObject();
-                    clone = Instantiate(smallBox, this.transform.position, this.transform.rotation);
+                    GameObject clone = Instantiate(smallBox, this.transform.position, this.transform.rotation);
                     cookieScale.Set(this.transform.localScale.x - .5f, this.transform.localScale.y - .5f, 1);
                     clone.transform.localScale = cookieScale;
                     --gameManager.smallCookies;
-                    Rigidbody2D cloned;
-                    //clones a small cookie box, and sends it to the left at a certain speed
-                    cloned = Instantiate(Smallbox, transform.position, transform.rotation);
-                    cloned.AddForce(CookieSpeed);
-                    gameManager.smallCookies--;
-
                 }
             }
             //if Q is pressed, player throws a big cookie and reduces big cookie count
@@ -219,12 +199,6 @@ public class PlayerControl : MonoBehaviour
                     cookieScale.Set(this.transform.localScale.x - .5f, this.transform.localScale.y - .5f, 1);
                     clone.transform.localScale = cookieScale;
                     --gameManager.bigCookies;
-                    //clones a big cookie box then sends it to the left.
-     
-                    Rigidbody2D clone2;
-                    clone2 = Instantiate(Bigbox, transform.position, transform.rotation);
-                    clone2.AddForce(CookieSpeed);
-                    gameManager.bigCookies--;
                 }
             }
          }
