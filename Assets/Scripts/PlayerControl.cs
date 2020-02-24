@@ -137,34 +137,6 @@ public class PlayerControl : MonoBehaviour
                 
             }
         }
-        //these if statements handle the looping if the player hits the bottom of the screen
-        if(pos == 5)
-        {
-            pos = 1;
-        }
-        if(pos ==6)
-        {
-            pos = 0;
-        }
-        if (pos == -1)
-        {
-            pos = 3;
-        }
-        if (pos == -2)
-        {
-            pos = 4;
-        }
-        //moves the player to a new location
-        rb2D.position = rowLocs[pos];
-        //these flip the player model if they are on the left or right side
-        if (pos == 1 || pos == 3)
-        {
-            sprite.flipX = true;
-        }
-        if (pos == 0 || pos == 2 || pos == 4)
-        {
-            sprite.flipX = false;
-        }
     }
 
     private void interactPlayer()
