@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Text bCookieCountText;
     public int smallCookies = 0;
     public int bigCookies = 0;
+    
 
     //awake is called before start
     private void Awake()
@@ -28,9 +31,12 @@ public class GameManager : MonoBehaviour
             //this enforces the singleton pattern, meaning there can only be one instnace of the GameManager
             Destroy(this.gameObject);
         }
-
+        /*
         //set this to not be destroyed when going between scenes
         DontDestroyOnLoad(this.gameObject);
+
+        Not needed, since the game is only 1 level - it's small enough to not need to save anything.
+        */
     }
 
     // Start is called before the first frame update
@@ -47,9 +53,23 @@ public class GameManager : MonoBehaviour
 
     public void setText()
     {
+        //sets the scores and cookies into the game space
         scorecountText.text = "Score: " + score.ToString();
-        sCookieCountText.text = "Small Cookies: " + smallCookies.ToString();
-        bCookieCountText.text = "Big Cookies: " + bigCookies.ToString();
+        sCookieCountText.text = smallCookies.ToString();
+        bCookieCountText.text = bigCookies.ToString();
 
+    }
+    public void GameOver()
+    {
+        GameObject.Find("GameOver").SetActive(true);
+        Time.timeScale = 0;
+
+        Example();
+
+        SceneManager.LoadScene("TitleScene");
+    }
+    IEnumerator Example()
+    {
+        yield return new WaitForSeconds(2);
     }
 }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4997213096807057945}
   - component: {fileID: 4997213096807057946}
-  - component: {fileID: 4997213096807057947}
   - component: {fileID: 293696321523666070}
   m_Layer: 0
   m_Name: Oven
@@ -71,8 +70,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f0fa6cb7b444a434d89c52eaa1370d98, type: 3}
-  m_Color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+  m_Sprite: {fileID: 21300000, guid: aef53e05fc358b84da07aef7e05cb098, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -82,19 +81,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &4997213096807057947
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4997213096807057924}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 7.93, y: 5.75, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &293696321523666070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,4 +94,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bakeSpeed: 0
+  timeLeft: 0
   cookieType: {fileID: 0}
+  numCookies: 0
+  baking: 0
+  done: 0
+  burning: 0
+  burned: 0
+  linkedHandle: {fileID: 0}
