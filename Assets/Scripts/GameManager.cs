@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public Text bCookieCountText;
     public int smallCookies = 0;
     public int bigCookies = 0;
+
+
     
 
     //awake is called before start
@@ -48,7 +50,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Time.timeScale = 1;
     }
 
     public void setText()
@@ -61,15 +63,9 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-        GameObject.Find("GameOver").SetActive(true);
-        Time.timeScale = 0;
-
-        Example();
 
         SceneManager.LoadScene("TitleScene");
     }
-    IEnumerator Example()
-    {
-        yield return new WaitForSeconds(2);
-    }
+   
+    
 }

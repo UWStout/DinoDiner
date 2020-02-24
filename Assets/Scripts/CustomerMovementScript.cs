@@ -5,6 +5,7 @@ using UnityEngine;
 public class CustomerMovementScript: MonoBehaviour
 {
     public float speed = 5; //Higher numbers mean slower movement!
+    GameManager gameManager;
 
 
     // Start is called before the first frame update
