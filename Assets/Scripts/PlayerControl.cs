@@ -164,7 +164,7 @@ public class PlayerControl : MonoBehaviour
                 if (bigOven.done)
                 {
                     //collects big cookies and resets variables
-                    gameManager.bigCookies += 4;
+                    gameManager.bigCookies += 1;
                     gameManager.setText();
                     bigOven.resetVars();
                 }
