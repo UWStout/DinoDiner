@@ -30,9 +30,12 @@ public class GameManager : MonoBehaviour
             //this enforces the singleton pattern, meaning there can only be one instnace of the GameManager
             Destroy(this.gameObject);
         }
-
+        /*
         //set this to not be destroyed when going between scenes
         DontDestroyOnLoad(this.gameObject);
+
+        Not needed, since the game is only 1 level - it's small enough to not need to save anything.
+        */
     }
 
     // Start is called before the first frame update
