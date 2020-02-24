@@ -46,7 +46,6 @@ public class FillBarScript : MonoBehaviour
             {
                 CurrentValue = -1 * (linkedOven.timeLeft / linkedOven.bakeSpeed);
                 opNum = CurrentValue / 50;
-                print(opNum);
                 tempBarcolor.r += opNum;
                 tempBarcolor.g -= opNum; //color is from 0 to 1, so we need to divide Currentvalue by a larger number to get it in that range for gradual coloration
                 tempBarcolor.b = 0;

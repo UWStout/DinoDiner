@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Text bCookieCountText;
     public int smallCookies = 0;
     public int bigCookies = 0;
+    public bool isPaused = false;
 
 
     

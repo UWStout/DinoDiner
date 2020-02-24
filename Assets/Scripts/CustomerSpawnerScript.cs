@@ -5,8 +5,9 @@ public class CustomerSpawnerScript : MonoBehaviour
 {
     public GameObject[] pool;
     public float scale;
-    public int wait_time;
     public int renderOrder = 0;
+    public GameManager gameManager;
+    bool crRunning = false;
 
 
 
@@ -18,24 +19,31 @@ public class CustomerSpawnerScript : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
+        if (!crRunning && !gameManager.isPaused)
+        {
+            print("Starting CR");
+            StartCoroutine(spawnCustomer());
+        }
     }
 
-    IEnumerator spawnCustomer()
+    private IEnumerator spawnCustomer()
     {
-
-        while (true)
+        crRunning = true;
+        print("true");
+        while (!gameManager.isPaused)
         {
-            wait_time = Random.Range(0, 20);
-            yield return new WaitForSeconds(wait_time);
-            GameObject clone = Instantiate(pool[Random.Range(0, 3)], this.transform.position, this.transform.rotation);
-            clone.transform.localScale = new Vector3(scale, scale, 1);
-            SpriteRenderer sClone = clone.GetComponent<SpriteRenderer>();
-            sClone.sortingOrder = renderOrder;
-
-
+            yield return new WaitForSeconds(Random.Range(0, 16));
+            if (!gameManager.isPaused)
+            {
+                GameObject clone = Instantiate(pool[Random.Range(0, 3)], this.transform.position, this.transform.rotation);
+                clone.transform.localScale = new Vector3(scale, scale, 1);
+                SpriteRenderer sClone = clone.GetComponent<SpriteRenderer>();
+                sClone.sortingOrder = renderOrder;
+            }
         }
+        crRunning = false;
+        print("false");
     }
 }

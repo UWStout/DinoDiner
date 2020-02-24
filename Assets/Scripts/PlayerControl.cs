@@ -53,8 +53,11 @@ public class PlayerControl : MonoBehaviour
     //FixedUpdate is independant of framerate
     void FixedUpdate()
     {
-        movePlayer();
-        interactPlayer();
+        if (!gameManager.isPaused)
+        {
+            movePlayer();
+            interactPlayer();
+        }
     }
 
     private void movePlayer()
@@ -64,7 +67,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (inRows)
             {
-                if(pos > 0)
+                if (pos > 0)
                 {
                     --pos;
                     rb2D.position = rowLocs[pos];
@@ -123,7 +126,7 @@ public class PlayerControl : MonoBehaviour
                 rb2D.position = ovenLocs[pos];
                 sprite.flipX = true;
                 inRows = false;
-                
+
             }
         }
     }
@@ -178,7 +181,7 @@ public class PlayerControl : MonoBehaviour
 
         }
         if (inRows)
-         {
+        {
             //this throws the small cookie when E or V are pressed
             if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.V))
             {
@@ -201,6 +204,6 @@ public class PlayerControl : MonoBehaviour
                     --gameManager.bigCookies;
                 }
             }
-         }
+        }
     }
 }

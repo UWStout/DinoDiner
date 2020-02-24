@@ -11,41 +11,42 @@ public class OvenScript : MonoBehaviour
     public bool burned = false;
     public GameObject linkedHandle;
     public Animator linkedTooter;
+    public GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        /* To Do:
-         * Make a bakeCookie() function that, after bakeSpeed seconds, give the player numCookies cookieTypes
-         */
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (baking)
+        if (!gameManager.isPaused)
         {
-            linkedTooter.SetBool("linkedIsCooking", true);
-            linkedHandle.SetActive(true);
-
-            timeLeft -= Time.deltaTime;
-            //this if statement is what determines the first countdown for the cookies to be cooked.
-            if (timeLeft <= 0 )
+            if (baking)
             {
-                done = true;
-                burning = true;
+                linkedTooter.SetBool("linkedIsCooking", true);
+                linkedHandle.SetActive(true);
+
+                timeLeft -= Time.deltaTime;
+                //this if statement is what determines the first countdown for the cookies to be cooked.
+                if (timeLeft <= 0)
+                {
+                    done = true;
+                    burning = true;
+                }
+                //this statement determines if the cookies become burnt
+                if (timeLeft < -bakeSpeed)
+                {
+                    linkedTooter.SetBool("linkedIsCooking", false);
+                    done = false;
+                    burned = true;
+                }
             }
-            //this statement determines if the cookies become burnt
-            if (timeLeft < -bakeSpeed)
+            else
             {
                 linkedTooter.SetBool("linkedIsCooking", false);
-                done = false;
-                burned = true;
             }
-        }
-        else
-        {
-            linkedTooter.SetBool("linkedIsCooking", false);
         }
     }
 

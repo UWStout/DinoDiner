@@ -5,12 +5,14 @@ using UnityEngine;
 public class CustomerMovementScript: MonoBehaviour
 {
     public float speed = 5; //Higher numbers mean slower movement!
-    GameManager gameManager;
+    private GameManager gameManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         //origin = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
         InvokeRepeating("moveForward", 1f, speed/5);
 
@@ -23,7 +25,9 @@ public class CustomerMovementScript: MonoBehaviour
 
     private void moveForward()
     {
-        this.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
+        if (!gameManager.isPaused) {
+            this.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
+        }
     }
 
 

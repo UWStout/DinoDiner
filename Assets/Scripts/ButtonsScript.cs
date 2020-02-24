@@ -7,7 +7,7 @@ public class ButtonsScript : MonoBehaviour
 {
     public GameObject pausePanel;
     public GameObject controlsPanel;
-    private bool isPaused = false;
+    public GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -23,16 +23,18 @@ public class ButtonsScript : MonoBehaviour
 
     public void PauseButton()
     {
-        if (!isPaused) {
+        if (!gameManager.isPaused) {
+            
             Time.timeScale = 0;
             pausePanel.SetActive(true);
-            isPaused = true;
+            gameManager.isPaused = true;
         }
         else
         {
+            
             pausePanel.SetActive(false);
             Time.timeScale = 1;
-            isPaused = false;
+            gameManager.isPaused = false;
         }
     }
 
@@ -40,7 +42,7 @@ public class ButtonsScript : MonoBehaviour
     {
         pausePanel.SetActive(false);
         Time.timeScale = 1;
-        isPaused = false;
+        gameManager.isPaused = false;
     }
 
     public void QuitButton()
