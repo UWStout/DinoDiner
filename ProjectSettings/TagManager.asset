@@ -8,6 +8,7 @@ TagManager:
   - SmallCookie
   - BigCookie
   - CookieStopper
+  - Stopper
   layers:
   - Default
   - TransparentFX

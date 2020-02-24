@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -63,6 +64,12 @@ public class GameManager : MonoBehaviour
         GameObject.Find("GameOver").SetActive(true);
         Time.timeScale = 0;
 
-        SceneManager.LoadScene("Diner");
+        Example();
+
+        SceneManager.LoadScene("TitleScene");
+    }
+    IEnumerator Example()
+    {
+        yield return new WaitForSeconds(2);
     }
 }

@@ -8,6 +8,8 @@ public class CookieScript : MonoBehaviour
     public int speed;
     public Rigidbody2D rb2d;
     public bool isSmall;
+    public AudioClip clip;
+    AudioSource crunch;
 
 
     // Start is called before the first frame update
@@ -15,7 +17,8 @@ public class CookieScript : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb2d = this.GetComponent<Rigidbody2D>();
-        rb2d.AddForce(new Vector2(-speed*100, 0));
+        rb2d.AddForce(new Vector2(-speed * 100, 0));
+        crunch = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,23 +27,29 @@ public class CookieScript : MonoBehaviour
 
     }
     //  TODO if cookie is big cookie, push customer back a lot and delete customer. If cookie is small cookie, push back a little
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         if (collision.gameObject.tag == "Customer")
         {
+
+            AudioSource.PlayClipAtPoint(clip, new Vector3(0,0,-100));
             Destroy(collision.gameObject);
             if (isSmall)
             {
+
                 Destroy(this.gameObject);
             }
             gameManager.score++;
             gameManager.setText();
-            
+
         }
         if (collision.gameObject.tag == "CookieStopper")
         {
             Destroy(this.gameObject);
         }
     }
+
+        
+
 }
