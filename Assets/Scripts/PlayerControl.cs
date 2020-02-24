@@ -12,6 +12,8 @@ public class PlayerControl : MonoBehaviour
     public GameObject bigBox;
     public GameObject smallBox;
 
+    private int pos;
+
     public OvenScript bigOven;
     public OvenScript smallOven;
 
@@ -22,7 +24,7 @@ public class PlayerControl : MonoBehaviour
     private Vector3 cookiePos = new Vector3();
 
     private bool inRows = true;
-    private int pos;
+
     // Use this for initialization
     void Start()
     {
@@ -175,7 +177,6 @@ public class PlayerControl : MonoBehaviour
             }
 
         }
-
         if (inRows)
          {
             //this throws the small cookie when E or V are pressed
