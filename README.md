@@ -1,7 +1,7 @@
 # DinoDiner
 
 Installation
-##	Download the exe file and run it on your computer
+## You do not need to install the game; it is installed at https://deusathemis.itch.io/dino-diner
 
 Credits
 
